@@ -1,8 +1,9 @@
-call vice#Extend({
-    \ 'addons': [
-        \ 'github:scrooloose/nerdtree',
-        \ 'github:zeekay/nerdtree-hax',
-    \ ],
+call vice#CreateCommand('NERDTreeCD', ['github:scrooloose/nerdtree'], {
+    \ 'after': 'vice#nerdtree#after'
+\ })
+
+call vice#CreateCommand('NERDTreeToggle', ['github:scrooloose/nerdtree'], {
+    \ 'after': 'vice#nerdtree#after'
 \ })
 
 " Auto open nerd tree on startup
