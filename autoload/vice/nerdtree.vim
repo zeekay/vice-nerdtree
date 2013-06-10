@@ -38,7 +38,7 @@ endf
 
 function! vice#nerdtree#check_for_browse(dir)
     if a:dir != '' && isdirectory(a:dir)
-        silent! call vice#ForceActivateAddon('github:scrooloose/nerdtree')
-        silent! call g:NERDTreeCreator.CreateSecondary(a:dir)
+        call vice#ForceActivateAddon('github:scrooloose/nerdtree')
+        call g:NERDTreeCreator.CreateSecondary(a:dir)
     endif
 endfunction
