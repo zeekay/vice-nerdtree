@@ -6,6 +6,9 @@ call vice#CreateCommand('NERDTreeToggle', ['github:scrooloose/nerdtree'], {
     \ 'after': 'vice#nerdtree#after'
 \ })
 
+call vice#CreateCommand('FileExplorer', ['github:scrooloose/nerdtree'], {
+    \ 'after': 'vice#nerdtree#after'
+\ })
 " Auto open nerd tree on startup
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
@@ -28,3 +31,8 @@ let g:NERDTreeMapCWD = 'cd'
 
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeCD<cr>
+
+augroup NERDTreeHijackNetrw
+    autocmd VimEnter * silent! autocmd! FileExplorer
+    au BufEnter,VimEnter * call vice#nerdtree#check_for_browse(expand("<amatch>"))
+augroup END
