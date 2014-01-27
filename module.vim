@@ -30,6 +30,9 @@ let g:NERDTreeMapChdir = 'C'
 " Default key: CD
 let g:NERDTreeMapCWD = 'cd'
 
+let g:NERDTreeMapJumpFirstChild = '\j'
+let g:NERDTreeMapJumpLastChild = '\k'
+
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeCD<cr>
 
