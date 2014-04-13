@@ -24,6 +24,9 @@ let g:NERDTreeMouseMode = 3
 let g:NERDTreeCaseSensitiveSort = 1
 let g:NERDTreeChDirMode = 2
 
+" Ignore common files
+let NERDTreeIgnore = ['\.DS_Store$', '\.orig$', '\.pyc$', '\.pyo$', '\.swp$', '\.zwc$', '\.zwc.old$']
+
 " Default key: C/cd
 let g:NERDTreeMapChdir = 'C'
 
