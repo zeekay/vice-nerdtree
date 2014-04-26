@@ -40,6 +40,11 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeCD<cr>
 
 augroup NERDTreeHijackNetrw
-    autocmd VimEnter * silent! autocmd! FileExplorer
+    au VimEnter * silent! autocmd! FileExplorer
     au BufEnter,VimEnter * silent! call vice#nerdtree#check_for_browse(expand("<amatch>"))
+    au FileType nerdtree call vice#nerdtree#setup_mapping()
+augroup END
+
+augroup vinegar
+  autocmd!
 augroup END
