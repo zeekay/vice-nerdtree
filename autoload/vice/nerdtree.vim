@@ -5,53 +5,58 @@ func! vice#nerdtree#cd()
     pwd
 endf
 
+func! vice#nerdtree#cd_node(node)
+    silent! exe 'keepjumps cd '.a:node.path.str()
+    pwd
+endf
+
+func! vice#nerdtree#cl_node(node)
+    silent! exe 'keepjumps lcd '.a:node.path.str()
+    pwd
+endf
+
 " callback for nerdtree cd
-func! vice#nerdtree#cd_callback(dirnode)
-    silent! exec 'NERDTree '.a:dirnode.path.str()
+func! vice#nerdtree#cd_dirnode(dirnode)
+    silent! exe 'NERDTree '.a:dirnode.path.str()
     pwd
 endf
 
 " callback for nerdtree up
-func! vice#nerdtree#up_callback()
+func! vice#nerdtree#cd_up()
     if expand('%:p:h') != '/'
-        silent! NERDTree ..
+        let dir = expand('%:p:h:h')
+        silent! exe 'edit '.dir
+        silent! exe 'cd '.dir
     endif
     pwd
 endf
 
 " callback for ~
-func! vice#nerdtree#home_callback()
-    silent! NERDTree $HOME
+func! vice#nerdtree#cd_home()
+    silent! edit $HOME
     pwd
 endf
 
 " callback after nerdtree is loaded
 func! vice#nerdtree#after()
     call g:NERDTreeKeyMap.Create({
-        \ 'key': 'C',
-        \ 'callback': 'vice#nerdtree#cd_callback',
-        \ 'quickhelpText': 'cd and echo full path of current node',
-        \ 'scope': 'DirNode',
+        \ 'key': 'cd',
+        \ 'callback': 'vice#nerdtree#cd_node',
+        \ 'quickhelpText': 'cd to node and echo full path of current node',
+        \ 'scope': 'Node',
+    \ })
+
+    call g:NERDTreeKeyMap.Create({
+        \ 'key': 'cl',
+        \ 'callback': 'vice#nerdtree#cl_node',
+        \ 'quickhelpText': 'lcd to node and echo full path of current node',
+        \ 'scope': 'Node',
     \ })
 
     call g:NERDTreeKeyMap.Create({
        \ 'key': 'u',
-       \ 'callback': 'vice#nerdtree#up_callback',
-       \ 'quickhelpText': 'Move up and echo full path of current node',
-       \ 'scope': 'all',
-    \ })
-
-    call g:NERDTreeKeyMap.Create({
-       \ 'key': '-',
-       \ 'callback': 'vice#nerdtree#up_callback',
-       \ 'quickhelpText': 'Move up and echo full path of current node',
-       \ 'scope': 'all',
-    \ })
-
-    call g:NERDTreeKeyMap.Create({
-       \ 'key': '~',
-       \ 'callback': 'vice#nerdtree#home_callback',
-       \ 'quickhelpText': 'Navigate to $HOME',
+       \ 'callback': 'vice#nerdtree#cd_up',
+       \ 'quickhelpText': 'cd up and echo full path of current node',
        \ 'scope': 'all',
     \ })
 
@@ -82,4 +87,6 @@ func! vice#nerdtree#setup_mapping()
     xnoremap <buffer> . <Esc>: <C-R>=<SID>escaped(line("'<"), line("'>"))<CR><Home>
     nmap <buffer> ! .!
     xmap <buffer> ! .!
+    nnoremap <buffer> - :call vice#nerdtree#cd_up()<cr>
+    nnoremap <buffer> ~ :call vice#nerdtree#cd_home()<cr>
 endf

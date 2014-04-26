@@ -45,6 +45,5 @@ augroup NERDTreeHijackNetrw
     au FileType nerdtree call vice#nerdtree#setup_mapping()
 augroup END
 
-augroup vinegar
-  autocmd!
-augroup END
+" Borrowed from vim-vinegar.
+nnoremap - :edit .<cr>
