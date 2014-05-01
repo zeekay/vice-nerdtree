@@ -45,5 +45,4 @@ augroup NERDTreeHijackNetrw
     au FileType nerdtree call vice#nerdtree#setup_mapping()
 augroup END
 
-" Borrowed from vim-vinegar.
-nnoremap - :edit .<cr>
+nnoremap - * :call vice#nerdtree#enter_fullscreen()<cr>
