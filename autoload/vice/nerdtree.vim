@@ -87,6 +87,11 @@ func! vice#nerdtree#setup_mapping()
     xnoremap <buffer> . <Esc>: <C-R>=<SID>escaped(line("'<"), line("'>"))<CR><Home>
     nmap <buffer> ! .!
     xmap <buffer> ! .!
-    nnoremap <buffer> - :call vice#nerdtree#cd_up()<cr>
+    nnoremap <buffer> - :exe "edit ".g:file_before_nerdtree<cr>
     nnoremap <buffer> ~ :call vice#nerdtree#cd_home()<cr>
+endf
+
+func! vice#nerdtree#enter_fullscreen()
+    let g:file_before_nerdtree = expand('%:p')
+    edit .
 endf
